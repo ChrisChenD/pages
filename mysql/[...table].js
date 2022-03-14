@@ -69,17 +69,30 @@ function table_info(data){
     <h3 class="bg-black font-semibold text-slate-50 h-30">table {data.tb_name}</h3>
     <p>cname {data.tb_cname} ...</p>
     <p>len {data.cols.length}</p>
-    <div class='bg-stone-800 devive-y'>
-      {data.cols.map((obj)=>
-        <ol class='bg-stone-800'> 
-          <li class='text-slate-400'>{obj.name}</li>
-          <li>[{obj.cname}]</li>
-          <li>{obj.type}</li>
-        </ol>
-        
-      )}
+    {[
+      
+      (obj)=><li class='text-slate-50 w-32'>{obj.name}</li>, 
+      (obj)=><li class='text-slate-50 w-32'>{obj.cname}</li>, 
+      (obj)=><li class='text-slate-50 w-32 round'>{obj.type}</li>
+      // ,(obj)=><li class='text-slate-50 w-32 round'>{obj.type}</li>
+      ,(obj)=>(<input type="checkbox" class="text-slate-50 w-32"/>)
+      ,(obj)=>(<li><input class="text-black w-32" placeholder="query cond.."/></li>)
+      
+      //placeholder="Search for anything..."
+      // (obj)=><li class='text-slate-400'>{functor(obj)}</li>, 
+      // (obj)=>{obj.type}
+    ].map((functor)=>(
+      <div class='flex flex-row pr-5 pt-2'>
+      {data.cols.map((obj)=>(
+        <div class='box-border bg-blue-300 w-32 border-0.5'>
+          <ol>
+            {functor(obj)}
+          </ol>
+        </div>
+      ))}
     </div>
-
+    ))}
+      
     {/* <p>{typeof(data.cols[0])}..{data.cols[0].name}</p> */}
 
     {/* {data.cols.map((obj)=>{
