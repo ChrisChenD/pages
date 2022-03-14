@@ -65,14 +65,23 @@ function Table({method, data}) {
 export default Table;
 
 function table_info(data){
-  return <div>
-    <p>table {data.tb_name}</p>
+  return <div >
+    <h3 class="bg-black font-semibold text-slate-50 h-30">table {data.tb_name}</h3>
     <p>cname {data.tb_cname} ...</p>
     <p>len {data.cols.length}</p>
+    <div class='bg-stone-800 devive-y'>
+      {data.cols.map((obj)=>
+        <ol class='bg-stone-800'> 
+          <li class='text-slate-400'>{obj.name}</li>
+          <li>[{obj.cname}]</li>
+          <li>{obj.type}</li>
+        </ol>
+        
+      )}
+    </div>
+
     {/* <p>{typeof(data.cols[0])}..{data.cols[0].name}</p> */}
-    {data.cols.map((obj)=>
-      <p>{obj.name}[{obj.cname}].{obj.type}.</p>
-    )}
+
     {/* {data.cols.map((obj)=>{
       <p>{obj.name}[{obj.cname}].{obj.type}.</p>
     })} */}
