@@ -1,4 +1,5 @@
 
+import {Table_records, Note} from "../../components/compose"
 export async function getServerSideProps(context) {
     const {task} = context.query
     if (task.length == 1)
@@ -56,14 +57,12 @@ export async function getServerSideProps(context) {
       <p>cname {data.tb_cname} ...</p>
       <p>len {data.cols.length}</p>
       {[
-        
         (obj)=><li class='text-slate-50 w-32'>{obj.name}</li>, 
         (obj)=><li class='text-slate-50 w-32'>{obj.cname}</li>, 
         (obj)=><li class='text-slate-50 w-32 round'>{obj.type}</li>
         // ,(obj)=><li class='text-slate-50 w-32 round'>{obj.type}</li>
         ,(obj)=>(<input type="checkbox" class="text-slate-50 w-32"/>)
         ,(obj)=>(<li><input class="text-black w-32" placeholder="query cond.."/></li>)
-        
         //placeholder="Search for anything..."
         // (obj)=><li class='text-slate-400'>{functor(obj)}</li>, 
         // (obj)=>{obj.type}
@@ -87,9 +86,24 @@ export async function getServerSideProps(context) {
       {/* <p> {data.name}</p> */}
     </div>
   }
-  function get_task(data){
+function get_task(data){
+    // {'task_name': 't1', 'desc': '', 'src_dict': {}, 'output': ''}
     return (<div>
-      <p> get:task </p>
+      <h2> task </h2>
+      <p> {data.task_name} </p>
+      <h2> task describe </h2>
+      <li><input class="text-black w-32" placeholder={data.desc}/></li>
+      
+      <h2> task source {typeof(data.src_dict)}</h2>
+      {Object.keys(data.src_dict).map(
+        (name)=><p>{name}</p>
+      )}
+      {/* {data.src_dict.map((src)=>
+        <p> {src} </p>
+      )}  */}
+      <h2> output </h2>
+      <p> {data.output} </p>
+      <Table_records></Table_records>
+      {/* <Note></Note> */}
     </div>)
   }
-

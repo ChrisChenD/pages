@@ -15,6 +15,10 @@ import '../dist/output.css'
 // https://tailwindcss.com/docs/utility-first
 // 6 reusing style
 // https://tailwindcss.com/docs/reusing-styles
+
+// test add on
+// npm install -D @tailwindcss/typography
+
 function MyApp({ Component, pageProps }) {
   return <Component {...pageProps} />
 }
