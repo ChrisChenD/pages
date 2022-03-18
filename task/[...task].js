@@ -1,5 +1,6 @@
 
-import {Table_records, Note} from "../../components/compose"
+// import {Table_records, Note} from "../../components/compose"
+import {Table_records, Note} from "../component_utils/component"
 export async function getServerSideProps(context) {
     const {task} = context.query
     if (task.length == 1)
@@ -62,7 +63,7 @@ export async function getServerSideProps(context) {
         (obj)=><li class='text-slate-50 w-32 round'>{obj.type}</li>
         // ,(obj)=><li class='text-slate-50 w-32 round'>{obj.type}</li>
         ,(obj)=>(<input type="checkbox" class="text-slate-50 w-32"/>)
-        ,(obj)=>(<li><input class="text-black w-32" placeholder="query cond.."/></li>)
+        ,(obj)=>(<li><input type="checkbox" class="text-black w-32" placeholder="query cond.."/></li>)
         //placeholder="Search for anything..."
         // (obj)=><li class='text-slate-400'>{functor(obj)}</li>, 
         // (obj)=>{obj.type}
@@ -107,3 +108,5 @@ function get_task(data){
       {/* <Note></Note> */}
     </div>)
   }
+// 1 怎么动态的修改我们的 select 按钮?
+//

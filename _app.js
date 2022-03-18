@@ -18,9 +18,15 @@ import '../dist/output.css'
 
 // test add on
 // npm install -D @tailwindcss/typography
+// 7 router 
+// https://nextjs.org/docs/api-reference/next/router#routerevents
 
+// 8 component level fresh client, no need server
+// https://nextjs.org/docs/basic-features/data-fetching/client-side#client-side-data-fetching-with-useeffect
 function MyApp({ Component, pageProps }) {
   return <Component {...pageProps} />
 }
 
 export default MyApp
+
+
