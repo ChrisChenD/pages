@@ -3,7 +3,7 @@ import { createContext, useContext, React, useState, useCallback, useEffect } fr
 
 // import { MyContext } from '../../demo/context'; // import based on where you put it
 
-export const InputDemoContext = createContext([{}, () => {}]);
+export const InputDemoContext = createContext([[], () => {}]);
 // function input_switch(){
 //     // const {ctx, setCtx} = useMyContext()
 //     const {ctx, setCtx} = useContext(AppContext)
@@ -59,13 +59,36 @@ export function Input(){
 //     }
 //   }
 
+export const DemoContext = createContext([[], (func) => func()]);
+function selects(data){
+    // const [select_list, setSList] = useContext(DemoContext)
+    // return [select_list, setSList]
+    const [new_data, setData] = useState(data)
+    setData({new_data:[true, true, true]})
+    return [new_data, setData]
+}
 function Demo(data) {
-    const [select_list, setSList] = useState([true,true,true])
+    // const [select_list, setSList] = useState([true,true,true])
+    const [select_list, setSList] = selects([true, true, true])
+    // const [select_list2, setSList2] = selects()
+    console.log('select_list', select_list)
+    // setSList((select_list)=>[true, true, false])
+    // setSList([true, true, false])
+    console.log('select_list', select_list)
+    return <div>
+        {select_list.length}
+    </div>
+
+    
+    // const [select_list, setSList] = useState([true,true,true])
+    // DemoContext
+    
     const increment = (i)=> useCallback(() => {
+        const [select_list, setSList] = selects()
         console.log(select_list)
         select_list[i] = select_list[i]==true?false:true
         console.log(select_list)
-        setSList((raw_select_list) => select_list)
+        setSList((select_list) => select_list)
 
     }, [setSList])    
     // const increment = (i)=> () => {

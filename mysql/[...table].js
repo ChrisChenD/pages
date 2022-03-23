@@ -36,7 +36,7 @@ export async function getServerSideProps(context) {
       const db_name = table[0]
       const data = await (
         await fetch('http://127.0.0.1:5000/mysql/'+db_name, {})
-      ).json()    
+      ).json()
       // const data = fetch_json('http://127.0.0.1:5000/'+db_name)
       return {
         props:{
