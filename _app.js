@@ -24,6 +24,10 @@ import '../dist/output.css'
 
 // // 8 component level fresh client, no need server
 // // https://nextjs.org/docs/basic-features/data-fetching/client-side#client-side-data-fetching-with-useeffect
+// 9 refreshing ssp
+// https://www.joshwcomeau.com/nextjs/refreshing-server-side-props/
+
+
 // function MyApp({ Component, pageProps }) {
 //   return <Component {...pageProps} />
 // }

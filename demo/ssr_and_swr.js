@@ -9,6 +9,9 @@ const fetcher = (...args) => fetch(...args).then((res) => {
   return res.json()
 })
 
+
+
+
 const title_class_tr_selected = 'border-3 border-stone-600 bg-sky-200'
 const title_class_th_selected = 'border-2 border-stone-100'
 const title_class_tr_unselected = 'border-3 border-stone-600 bg-stone-400'
@@ -113,26 +116,30 @@ function select_col(select_func){
 //       )
 //   }
 
-async function upload(url){
-    await (
-        await fetch(url, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data),
-            mode: 'no-cors'
-        })
-        // await fetch(requestUrl, options)
-    )    
+export async function getServerSideProps() {
+  // const url = "http://localhost:5000/demo/table"
+  // const url = "http://localhost:3000/backEnd/demo/table"
+  const url = 'http://localhost:3000/backEnd/demo/table'
+  // const url = "http://localhost:3000/backEnd/demo/table"
+  // const url = "/backEnd/demo/table"
+  const data = await (
+    await fetch(url, {})
+    ).json()
+    console.log('getServerSideProps: data', data, typeof(data))
+    return {
+        props:{
+            "sv_data":data
+        }
+    }
 }
-
 // function Table3({table}) {
-function Table3() {
+function Table3({sv_data}) {
     // const table = getSwr("http://127.0.0.1:5000/demo/table")
     // const url = "http://localhost:5000/demo/table"
     const url = "/backEnd/demo/table"
     // const url = "http://127.0.0.1:3000/demo/tailwind"
     // const { table, error } = useSWR(url, fetcher)
-    const [table, setTable] = useState(null)
+    const [table, setData] = useState(null)
     const [isLoading, setLoading] = useState(false)
 
     useEffect(() => {
@@ -140,73 +147,79 @@ function Table3() {
       fetch(url)
         .then((res) => res.json())
         .then((data) => {
-            setTable(data)
-            setLoading(false)
+          setData(data)
+          setLoading(false)
         })
-    }, [setTable, setLoading, url])
+    }, [setData, setLoading, url])
 
     console.log('init table', typeof(table), table)
     console.log('loading', isLoading)
-    if (isLoading == true){
-        return <div>isLoading: {isLoading==true?'true':'false'}</div>
-    }
+    console.log('sv_data', sv_data)
+    
     // console.log('error', error, typeof(error))
-    const router = useRouter()
-    const reload_button = async () => {}
+    return <div>isLoading: {isLoading==true?'true':'false'}</div>
+    // const router = useRouter()
+    // const select_change = (idx)=>useCallback((e) => {
+    //     // const select_change = useCallback((e) => {
+    //     // e.preventDefault()
+    //     console.log('select_list', table.select_list)
+    //     table.select_list[idx] = table.select_list[idx]==true?false:true
+    //     console.log('select_list', table.select_list)
+    //     // table.select_list[0] = table.select_list[0]==true?false:true
+    //   }, [])
+    //   const reload_button = (idx)=>() => {
     // const reload_button = async () => {
     //     console.log('reload_button: table.select_list', table.select_list)
     //     table.select_list[1] = table.select_list[1]==true?false:true
     //     console.log('reload_button: table.select_list', table.select_list)
     //     upload('http://127.0.0.1:5000/demo/table', table)
-    //     // await fetch(upurl, )
-    //     // await()=>{}
-    //     // const { table, error } = useSWR(url, fetcher)
-
     //     // router.push(router.asPath)
     //     // router.reload()
     //     // window.location.reload(true)
     //     // window.location.reload(false)
     //     // location.reload(true)
     //     window.location = router.asPath
-    //     // router.reload()
+
     // }
 
-    const col_funcs = select_col(reload_button)
-    const [selects, unselects] = select_div(table.select_list)
+    // // const select_changes = [select_change(0), select_change(1), select_change(2)]
+    // // console.log('select_changes', select_changes)
+    // const col_funcs = select_col(reload_button)
+    // const [selects, unselects] = select_div(table.select_list)
     // console.log('table.select_list', table.select_list)
     // console.log('selects', selects)
     // console.log('unselects', unselects)
-    return <div>
-        {/* <Table_records {...table}></Table_records> */}
-        <div className='prose lg:prose-xl bg-amber-100'>
-        <p>hello</p>
-        <button onClick={reload_button}>reload_button_</button>
-        <table className="table-fixed">
-          <thead className='bg-sky-10'>
-          {col_funcs['name_list'](table.name_list, table.select_list)}
-          {col_funcs['cname_list'](table.cname_list, table.select_list)}
-          {col_funcs['type_list'](table.type_list, table.select_list)}
-          <tr className={title_class_tr_selected}  key="4">
-          {selects.map((index)=>
-            <th className={title_class_th_selected} key={index}>
-                <input type="checkbox" onChange={(e)=>{reload_button}} defaultChecked />
-            </th>
-          )}
-          {unselects.map((index)=>
-            <th className={title_class_th_unselected}  key={index}>
-                <input type="checkbox" onChange={(e)=>{reload_button}}/>
-            </th>
-            )}
-            </tr>
-          {col_funcs['cond_list'](table.cond_list, table.select_list)}
-          </thead>
-          <tbody>
-            {table.record_list.map(
-              col_funcs['record'](table.select_list),
-            )}
-          </tbody>
-        </table>
-      </div>
-    </div> 
+    // return <div>
+    //     {/* <Table_records {...table}></Table_records> */}
+    //     <div className='prose lg:prose-xl bg-amber-100'>
+    //     <p>hello</p>
+    //     <button onClick={reload_button}>reload_button_</button>
+    //     <table className="table-fixed">
+    //       <thead className='bg-sky-10'>
+    //       {col_funcs['name_list'](table.name_list, table.select_list)}
+    //       {col_funcs['cname_list'](table.cname_list, table.select_list)}
+    //       {col_funcs['type_list'](table.type_list, table.select_list)}
+    //       <tr className={title_class_tr_selected}  key="4">
+    //       {selects.map((index)=>
+    //         <th className={title_class_th_selected} key={index}>
+    //             <input type="checkbox" onChange={(e)=>{reload_button}} defaultChecked />
+    //         </th>
+    //       )}
+    //       {unselects.map((index)=>
+    //         <th className={title_class_th_unselected}  key={index}>
+    //             <input type="checkbox" onChange={(e)=>{reload_button}}/>
+    //         </th>
+    //         )}
+    //         </tr>
+    //       {col_funcs['cond_list'](table.cond_list, table.select_list)}
+    //       </thead>
+    //       <tbody>
+    //         {table.record_list.map(
+    //           col_funcs['record'](table.select_list),
+    //         )}
+    //       </tbody>
+    //     </table>
+    //   </div>
+    // </div> 
 }
 export default Table3;
