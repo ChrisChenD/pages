@@ -36,5 +36,8 @@ async function postData(url, data){
 
 export const data_fetch = {
   swr_get:getSwr,
-  post:postData
+  post:postData,
+  clone: (e)=>JSON.parse(JSON.stringify(e))
 }
+
+

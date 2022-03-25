@@ -29,7 +29,7 @@ async function upload(url, data){
             mode: 'no-cors'
         })
         // await fetch(requestUrl, options)
-    )    
+    )
 }
 
 function getSwr (url) {
@@ -134,3 +134,5 @@ function Table3() {
         </div> 
 }
 export default Table3;
+
+

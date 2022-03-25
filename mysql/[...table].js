@@ -70,7 +70,6 @@ export async function getServerSideProps(context) {
   function Table({method, data}) {
     // In your component body
     const router = useRouter()
-
     // call this method whenever you want to refresh server-side props
     // const refreshData = () => router.replace(router.asPath);
     
@@ -128,7 +127,6 @@ export async function getServerSideProps(context) {
       <p>cname {data.tb_cname} ...</p>
       <p>len {data.cols.length}</p>
       {[
-        
         (obj)=><li class='text-slate-50 w-32'>{obj.name}</li>, 
         (obj)=><li class='text-slate-50 w-32'>{obj.cname}</li>, 
         (obj)=><li class='text-slate-50 w-32 round'>{obj.type}</li>
@@ -150,7 +148,6 @@ export async function getServerSideProps(context) {
         ))}
       </div>
       ))}
-        
       {/* <p>{typeof(data.cols[0])}..{data.cols[0].name}</p> */}
       {/* {data.cols.map((obj)=>{
         <p>{obj.name}[{obj.cname}].{obj.type}.</p>
