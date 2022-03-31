@@ -15,7 +15,7 @@ const fetcher = async (...args) => await fetch(...args).then(async (res) => {
 function getSwr (url) {
   var { data, error } = useSWR(url, fetcher)
   return {
-    table: data,
+    data: data,
     isLoading: !error && !data,
     isError: error
   }

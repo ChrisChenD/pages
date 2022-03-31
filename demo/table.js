@@ -127,8 +127,8 @@ function Table3() {
     // const url = "http://localhost:5000/demo/table"
     const url = "/backEnd/demo/table"
     // const [table, setTable] = useState(null)
-    var { table, isLoading, isError } = data_fetch.swr_get(url)
-    
+    var { data, isLoading, isError } = data_fetch.swr_get(url)
+    var table = data
     const router = useRouter()
     let reload_page = async (table)=>{
         // const { table, error } = useSWR(url, fetcher)
