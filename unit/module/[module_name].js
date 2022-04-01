@@ -12,8 +12,6 @@ function Module_info(module){
     return <div>
         <div>
             <h1>table [{module.db_table_name}]</h1>
-        {/* </div>
-        <div> */}
             <button className="bg-stone-700 border-4 text-white" onClick={module.reload_page(
                 ()=>{
                     var new_module = data_fetch.clone(module)

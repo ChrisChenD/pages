@@ -12,8 +12,6 @@ function Module_info(module){
     return <div>
         <div>
             <h1>table [{module.db_table_name}]</h1>
-        {/* </div>
-        <div> */}
             <button className="bg-stone-700 border-4 text-white" onClick={module.reload_page(
                 ()=>{
                     var new_module = data_fetch.clone(module)
@@ -33,20 +31,39 @@ function DataModule(){
     const router = useRouter()
     var {src} = router.query
     const url = `/backEnd/unit/task_src/${src}`//+router.asPath
-    // console.log('url', url)
+    console.log('url', url)
+    // this branch check lead to
+    // Warning: React has detected a change in the order of Hooks called by DataModule.
+    if (!src) return <p>task_name is undefined</p>
+
     var { data, isLoading, isError } = data_fetch.swr_get(url)
     if (isLoading) return <p>loading</p>
     if (!data) return <p>data is empty</p>
-    
+    console.log('data', data)
     data.reload_page = (update_data) => async (data)=>{
         var new_data = update_data(data)
         data_fetch.post(url, new_data)
         window.location.reload(true)
     }
+    data.module.reload_page = data.reload_page
+    
+    // const router = useRouter()
+    // var {src} = router.query
+    // const url = `/backEnd/unit/task_src/${src}`//+router.asPath
+    // // console.log('url', url)
+    // var { data, isLoading, isError } = data_fetch.swr_get(url)
+    // if (isLoading) return <p>loading</p>
+    // if (!data) return <p>data is empty</p>
+    
+    // data.reload_page = (update_data) => async (data)=>{
+    //     var new_data = update_data(data)
+    //     data_fetch.post(url, new_data)
+    //     window.location.reload(true)
+    // }
 
     return (<div>
-        <Module_info {...data}></Module_info>
-        <Table_info {...data}></Table_info>
+        <Module_info {...data.module}></Module_info>
+        <Table_info {...data.module}></Table_info>
     </div>
     )
 }
