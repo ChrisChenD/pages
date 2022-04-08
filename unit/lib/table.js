@@ -19,7 +19,6 @@ const base_cookbook = {
     ]
 }
 function TrRecord(cookbook){
-    
     return (
         <tr className={cookbook.tr_class}  key={cookbook.tr_key}>
             {cookbook.th.map(

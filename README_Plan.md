@@ -364,7 +364,54 @@ B 后端数据:
 下一轮:
 1 完成一个同步两个模型的装置
 2 
+-----------------------------------------------
+上周的复杂设计对现在的我的状态来说，不能继续
+----
+重新回到简洁的设计中:
+1 我实现一个最基本的框架:
+    1 从多表到单sheet
+    2 merge方式是最简单的 11 映射
+    3 一共5个算子:
+        1 读取表 + select + cond
+        2 field_append
+        3 row-map
+        4 col-filter
+        5 write_to_excel_sheet1
+    4 固定的函数嵌套
+>> 1 python接口实现
+1 直接后端json调用
+----------------------------------
 
+task:
+task.name
+functor_list
+new_functor_list
+task.op
+
+functor_list:
+1 读取表 + select + cond
+2 field_append
+3 row-map
+4 col-filter
+5 write_to_excel_sheet1
+-----------------------------
+我们已经建立了一些基本结构
+a 可以通过 一些按钮新增算子过程
+    ++++
+b 我们应该能够删除这些过程
+    +++
+c 我们尝试修改和显示这些过程
+    1 算子的表
+        制作模型
+    2 加载表信息
+        fields en
+        fields cn
+        fields type
+        
+    3 扩展表:
+        select cond
+.
+-------------------------------------------
 
 
 
