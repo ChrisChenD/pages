@@ -8,11 +8,11 @@ import { useCallback, useState, useEffect } from "react"
 import useSWR from 'swr'
 import { fuchsia } from "tailwindcss/colors"
 const fetcher = async (...args) => await fetch(...args).then(async (res) => {
-    console.log('res.ok', res.ok)
-    console.log('res.error', res.error)
-    console.log('args', args)
+    // console.log('res.ok', res.ok)
+    // console.log('res.error', res.error)
+    // console.log('args', args)
     var data = await res.json()
-    console.log('data', data)
+    // console.log('data', data)
     return data
 })
 // const fetcher = (...args) => fetch(...args).then(res => res.json())
