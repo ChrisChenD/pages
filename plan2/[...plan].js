@@ -16,6 +16,9 @@ import {Table, Table_ext, Table_ext2} from '../../pages/unit/lib/table2'
 import {Button_push_text, Button_push} from '../../pages/unit/lib/button'
 import {Button} from '../../pages/unit/lib/button'
 
+// import {Plan_auto} from './libs/common_module'
+import {Plan2_view} from './libs/module_view'
+import {Parser} from './libs/compo'
 import useSWR from 'swr'
 class Functor{
     constructor(data) {
@@ -244,89 +247,27 @@ class Plan {
                     </textarea>
             </div>
         </div>)
-        // var button2_attr = {
-        //     'data':task_info, 
-        //     'reload_page':task_info.reload_page,
-        //     'modify_data':(new_data, value)=>{task_info.src_list.push(value);return task_info}, 
-        //     'button_name':"add src", 
-        //     'input_id':"add src"
-        // }
-        // var button_attr =(src, idx)=> ({
-        //     'data':task_info, 
-        //     'reload_page':task_info.reload_page,
-        //     'modify_data':((idx)=>(task_info)=>{
-        //         task_info.src_list.splice(idx, 1)
-        //         return task_info
-        //     })(idx), 
-        //     'button_name':`|->${src}`, 
-        //     'input_id':"add src"
-        // })
-        // return <div key='task_info'>
-        //     <h1>Task_info</h1>
-        //     <p>/task_name [{task_info.task_name}]</p>
-        //     <p>/src</p>
-        //     {task_info.src_list.map(
-        //         (src, idx)=><div key={`src_list-${src}`} className='flex'>
-        //             {/* <Button.push {...button_attr(src, idx)}></Button.push><a><p>/src/{src}</p></a></div> */}
-        //             {Button.push({
-        //                 'data':task_info, 
-        //                 'reload_page':task_info.reload_page,
-        //                 'modify_data':((idx)=>(task_info)=>{
-        //                     task_info.src_list.splice(idx, 1)
-        //                     return task_info
-        //                 })(idx), 
-        //                 'button_name':`|->${src}`, 
-        //             })}
-        //             <a><p>/src/{src}</p></a></div>
-        //     )}
-        //     {/* <Button.push_text {...button2_attr}></Button.push_text> */}
-        //     {Button.push_text({
-        //         'data':task_info, 
-        //         'reload_page':task_info.reload_page,
-        //         'modify_data':(new_data, value)=>{task_info.src_list.push(value);return task_info}, 
-        //         'button_name':"add src", 
-        //         'input_id':"add src"
-        //     })}
-        //     <p>/out</p>
-        //     <p>/out/name [{task_info.out_name}]</p>
-        //     <p>/out/sheet</p>
-        //     {task_info.out_sheet.map(
-        //         (sheet)=><div key={`sheet-${sheet.name}`}>
-        //             <p>/out/sheet/{sheet.name}</p>
-        //             {sheet.fields.map(
-        //                 (field)=><p>/out/sheet/{field}</p>
-        //             )}
-        //         </div>
-        //     )}
-        // </div>
     }
 }
 
 function DataModule(){
+    // var data = {}
     const router = useRouter()
     var {plan} = router.query
-    const url = `/backEnd/plan_old/${plan}`//+router.asPath
-    // this branch check lead to 
-    // Warning: React has detected a change in the order of Hooks called by DataModule.
+    const url = `/backEnd/plan/${plan}`//+router.asPath
     if (!plan) return <p>plan is undefined</p>
 
     var { data, isLoading, isError } = data_fetch.swr_get(url)
     if (isLoading) return <p>loading</p>
     if (!data) return <p>data is empty</p>
-    data.reload_page = (update_data) => async (data)=>{
-        var new_data = update_data(data)
-        data_fetch.post(url, new_data)
+    data.post_call = (data) => async ()=>{
+        data_fetch.post(url, data)
         window.location.reload(true)
     }
     console.log('data', data)
-    // var task = new Task(data)
     return (<div>
-        {/* <component.html></component.html> */}
-        {/* {component.html()} */}
-        <Plan.html {...data}></Plan.html>
-        {/* <task.html {...data}></task.html> */}
-        {/* <Module_info {...data}></Module_info> */}
-        {/* <Task_info {...data}></Task_info> */}
+        {/* <Plan2_view.html {...data}></Plan2_view.html> */}
+        <Plan2_view {...data}></Plan2_view>
     </div>
     )
 }

@@ -9,6 +9,12 @@ export class Button {
         this.input_id = ""
         if (data.input_id) this.input_id = data.input_id
     }
+    static biu(data){var self = new Button(data)
+        return <button className="bg-stone-700 border-4 text-white" onClick={()=>{
+            // var data = self.modify_data()
+            self.reload_page((data)=>data)(self.data)
+        }}> @{self.button_name}@ </button>
+    }
     static push(data){var self = new Button(data)
         
         return <button className="bg-stone-700 border-4 text-white" onClick={self.reload_page(

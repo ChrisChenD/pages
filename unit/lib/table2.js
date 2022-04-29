@@ -294,10 +294,11 @@ export class Table_ext2 extends Table_ext{
     constructor(data){
         super(data)
         this.key_list = data.key_list
+        this.prev_list = data.prev_list
     }
     get_key_param(){
         var maker = (field, index)=>{
-            var button_name = field.value.value
+            var button_name = field.value
             // if (index==0) button_name = field.value
             return <div key="select-param">
                 {/* <p></p> */}
@@ -318,7 +319,33 @@ export class Table_ext2 extends Table_ext{
         }
         return this.get_param(this.key_list,
             maker
-            )
+        )
+    }
+    get_prev_list_param(){
+        console.log('this.prev_list', this.prev_list)
+        var maker = (field, index)=>{
+            var button_name = field.value
+            // if (index==0) button_name = field.value
+            return <div key="select-param">
+                {/* <p></p> */}
+                {Button.push({
+                    'data':"", 
+                    'reload_page':this.reload_page,
+                    'modify_data':(data)=>{
+                        // def select_key(self, field_id):
+                        return {
+                            'method':'functor_select_chunk_key',
+                            'functor_id':this.idx,
+                            'field_id':index,
+                        }
+                    },
+                    'button_name':button_name,
+                })}
+            </div>
+        }
+        return this.get_param(this.prev_list,
+            maker
+        )
     }
     // get_key_param(){
     //     return this.get_param(this.key_list,
@@ -353,9 +380,11 @@ export class Table_ext2 extends Table_ext{
         var select_param = self.get_select_param()
         var cond_param = self.get_cond_param()
         var key_param = self.get_key_param()
+        var prev_list_param = self.get_prev_list_param()
+        console.log('prev_list_param', prev_list_param)
         console.log('data', data)
-        console.log('comment_param', comment_param)
-        console.log('select', select_param)
+        // console.log('comment_param', comment_param)
+        // console.log('select', select_param)
         if (!(self.table_name && self.field_list))
             return <p>data isLoading</p>
         return <div key='table'>
@@ -370,6 +399,7 @@ export class Table_ext2 extends Table_ext{
                     {<TrRecord.html {...select_param}></TrRecord.html>}
                     {<TrRecord.html {...cond_param}></TrRecord.html>}
                     {<TrRecord.html {...key_param}></TrRecord.html>}
+                    {<TrRecord.html {...prev_list_param}></TrRecord.html>}
                     
                     {/* {TrRecord.html(comment_param)} */}
                 </tbody>
