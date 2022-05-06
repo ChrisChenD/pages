@@ -69,12 +69,14 @@ export function Plan2_view(data){
         // <Functor_new.html key='functor-new-html' {...new_functor}></Functor_new.html>
     )}
     <Plan_op_view key='op-html' {...self.op}></Plan_op_view>
+    <p className='bg-stone-700 border-4 text-white'></p>
     <div key='auto_code'>
         <textarea 
             // className="w-96 h-auto"
             rows="40" cols="80"
             defaultValue={self.auto_code}>
             </textarea>
+        
     </div>
 </div>)
 }

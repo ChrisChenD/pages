@@ -17,6 +17,9 @@ import {Button_push_text, Button_push} from '../../pages/unit/lib/button'
 import {Button} from '../../pages/unit/lib/button'
 
 import useSWR from 'swr'
+
+
+
 class Functor{
     constructor(data) {
         // this.data = data
@@ -324,6 +327,7 @@ function DataModule(){
         {/* <component.html></component.html> */}
         {/* {component.html()} */}
         <Plan.html {...data}></Plan.html>
+        <p className='bg-stone-700 border-4 text-white'>a</p>
         {/* <task.html {...data}></task.html> */}
         {/* <Module_info {...data}></Module_info> */}
         {/* <Task_info {...data}></Task_info> */}

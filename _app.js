@@ -1,7 +1,27 @@
 import '../styles/globals.css'
-// import '../src/input.css'
-// import '../styles/Home.module.css'
 import '../dist/output.css'
+// tailwind
+// 1 install
+// npm install -D tailwindcss
+// npx tailwindcss init
+
+// 2 修改 tailwind.js
+// module.exports = {
+//     content: [
+//       "./pages/**/*.{js,ts,jsx,tsx}",
+//       "./components/**/*.{js,ts,jsx,tsx}",
+//     ],
+//     theme: {
+//       extend: {},
+//     },
+//     plugins: [],
+// }
+
+// 3 compile
+// npx tailwindcss -i ./pages/tailwind_base.css -o ./dist/output.css --watch
+
+
+
 
 
 // // 1 例子: https://tailwindcss.com/
@@ -10,7 +30,7 @@ import '../dist/output.css'
 
 // // 3 Start the Tailwind CLI build process
 // // https://tailwindcss.com/docs/installation
-// // npx tailwindcss -i ./styles/globals.css -o ./dist/output.css --watch
+// // npx tailwindcss -i ./pages/tailwind_base.css -o ./dist/output.css --watch
 // // 4 color https://tailwindcss.com/docs/customizing-colors
 // // 5 utility
 // // https://tailwindcss.com/docs/utility-first

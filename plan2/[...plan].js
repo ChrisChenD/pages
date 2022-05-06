@@ -248,7 +248,20 @@ class Plan {
             </div>
         </div>)
     }
+    static view(data){var self = new Plan(data)
+        return <div className={self.name} key={self.key}>
+            <h1>Plan {self.name}</h1>
+            {self.functor_list.map(
+                (functor, idx)=>{
+                    return <Functor.view key={`functor-html-${idx}`} 
+                        {...functor}></Functor.view>
+                }
+            )}
+        </div>
+    }
 }
+
+
 
 function DataModule(){
     // var data = {}
