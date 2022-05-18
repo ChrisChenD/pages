@@ -36,6 +36,17 @@ async function postData(url, data) {
     // await fetch(requestUrl, options)
     )
 }
+async function postData2(url, data) {
+    await (
+        await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+            mode: 'no-cors'
+        })
+    // await fetch(requestUrl, options)
+    )
+}
 
 function keyup(eid, func) {
     document.getElementById(eid).addEventListener('keyup', 

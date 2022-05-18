@@ -21,9 +21,14 @@ function DataModule(){
     var { data, isLoading, isError } = data_fetch.swr_get(url)
     if (isLoading) return <p>loading</p>
     if (!data) return <p>data is empty</p>
-    data.call = (update_data) => async (data)=>{
-        var new_data = update_data(data)
-        data_fetch.post(url, new_data)
+    // data.call = (update_data) => async (data)=>{
+    //     var new_data = update_data(data)
+    //     data_fetch.post(url, new_data)
+    //     window.location.reload(true)
+    // }    
+    data.call = (call_param) => async ()=>{
+        // var new_data = update_data(data)
+        data_fetch.post(url, call_param)
         window.location.reload(true)
     }
     console.log('data', data)
